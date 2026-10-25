@@ -1,5 +1,5 @@
 Flask==3.0.3
 python-dotenv==1.0.1
 bcrypt==4.1.2
-bandit==1.7.8
+bandit==1.9.4
 semgrep==1.70.0
