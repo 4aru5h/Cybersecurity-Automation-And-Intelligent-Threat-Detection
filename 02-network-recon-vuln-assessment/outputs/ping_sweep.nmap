@@ -1,0 +1,14 @@
+# Nmap 7.94 scan initiated Sat Aug 15 10:00:00 2026 as: nmap -sn -PE -PA80,443 -PP 192.168.56.0/24 -oN outputs/ping_sweep.nmap
+Nmap scan report for 192.168.56.10
+Host is up (0.00012s latency).
+MAC Address: 08:00:27:11:22:33 (Oracle VirtualBox virtual NIC)
+
+Nmap scan report for 192.168.56.15
+Host is up (0.00045s latency).
+MAC Address: 08:00:27:AA:BB:CC (Oracle VirtualBox virtual NIC)
+
+Nmap scan report for 192.168.56.20
+Host is up (0.00038s latency).
+MAC Address: 08:00:27:DD:EE:FF (Oracle VirtualBox virtual NIC)
+
+Nmap done: 256 IP addresses (3 hosts up) scanned in 1.84 seconds

@@ -1,0 +1,8 @@
+// Zone definition for lab.local
+// Note: 'allow-transfer { any; };' is intentionally set to simulate the DNS AXFR vulnerability.
+
+zone "lab.local" {
+    type master;
+    file "/etc/bind/db.lab.local";
+    allow-transfer { any; };
+};

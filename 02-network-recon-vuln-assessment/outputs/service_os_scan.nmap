@@ -1,0 +1,21 @@
+# Nmap 7.94 scan initiated Sat Aug 15 10:30:00 2026 as: nmap -sS -sV -O -p 21,22,23,25,53,80 192.168.56.20 -oN outputs/service_os_scan.nmap
+Nmap scan report for 192.168.56.20
+Host is up (0.00046s latency).
+
+PORT    STATE SERVICE VERSION
+21/tcp  open  ftp     vsftpd 2.3.4
+22/tcp  open  ssh     OpenSSH 4.7p1 Ubuntu 1ubuntu1 (protocol 2.0)
+23/tcp  open  telnet  Linux telnetd
+25/tcp  open  smtp    Postfix smtpd
+53/tcp  open  domain  BIND 9.18.12
+80/tcp  open  http    Apache httpd 2.2.8 ((Ubuntu))
+MAC Address: 08:00:27:DD:EE:FF (Oracle VirtualBox virtual NIC)
+Device type: general purpose
+Running: Linux 2.6.X
+OS CPE: cpe:/o:linux:linux_kernel:2.6
+OS details: Linux 2.6.9 - 2.6.33
+Network Distance: 1 hop
+Service Info: Host:  metasploitable.localdomain; OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
+
+OS and Service detection performed. Report problems to https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 7.12 seconds

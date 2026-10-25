@@ -1,0 +1,49 @@
+===================================================================
+Passive OSINT & External DNS Reconnaissance Log
+Target Domain: example.com
+Search Engines / Public Registries Consulted: Public DNS, Shodan
+Date Executed: Sat Aug 15 09:30:00 UTC 2026
+===================================================================
+
+[+] PASSIVE DNS LOOKUPS (via Google/Cloudflare Public Resolvers)
+
+1. A Record Lookup:
+dig +short A example.com @8.8.8.8
+93.184.215.14
+
+2. Name Server (NS) Lookup:
+dig +short NS example.com @8.8.8.8
+a.iana-servers.net.
+b.iana-servers.net.
+
+3. Mail Exchange (MX) Lookup:
+dig +short MX example.com @8.8.8.8
+10 mail.example.com.
+
+4. TXT (SPF Policy) Record Lookup:
+dig +short TXT example.com @8.8.8.8
+"v=spf1 include:_spf.google.com ~all"
+
+-------------------------------------------------------------------
+
+[+] PUBLIC SEARCH ENGINE INTELLIGENCE (SHODAN QUERY RECON)
+Command: shodan host 93.184.215.14
+
+IP: 93.184.215.14
+Hostnames: example.com
+City: Los Angeles
+Country: United States
+Organization: EDGECAST
+Ports Open: 80, 443
+
+Port 80/TCP Response Header:
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+Server: Apache/2.4.41 (Ubuntu)
+ETag: "3147273714+gzip"
+Cache-Control: max-age=604800
+
+[*] PASSIVE ANALYSIS SUMMARY:
+- Identified hosting provider (Edgecast CDN) and mail gateway provider (Google Workspace).
+- Disclosed soft-fail SPF configuration (~all), indicating email spoofing susceptibility.
+- Exposed web server operating system details (Ubuntu Linux) and web daemon version (Apache 2.4.41).

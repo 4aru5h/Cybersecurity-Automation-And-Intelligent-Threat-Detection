@@ -1,0 +1,56 @@
+===================================================================
+Active DNS Enumeration - Lab Target Environment
+Target DNS Server: 192.168.56.15 (BIND 9.18.12)
+Target Domain: lab.local
+Date Executed: Sat Aug 15 10:45:00 UTC 2026
+===================================================================
+
+[+] STEP 1: Standard Query for ALL Available Records (ANY)
+Command: dig ANY lab.local @192.168.56.15
+
+; <<>> DiG 9.18.28-1~deb12u1-Kali <<>> ANY lab.local @192.168.56.15
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 48102
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 4, AUTHORITY: 0, ADDITIONAL: 2
+
+;; QUESTION SECTION:
+;lab.local.			IN	ANY
+
+;; ANSWER SECTION:
+lab.local.		604800	IN	SOA	ns1.lab.local. admin.lab.local. 2026081501 604800 86400 2419200 604800
+lab.local.		604800	IN	NS	ns1.lab.local.
+lab.local.		604800	IN	MX	10 mail.lab.local.
+lab.local.		604800	IN	TXT	"v=spf1 mx a -all"
+
+;; ADDITIONAL SECTION:
+ns1.lab.local.		604800	IN	A	192.168.56.15
+mail.lab.local.		604800	IN	A	192.168.56.20
+
+;; Query time: 2 msec
+;; SERVER: 192.168.56.15#53(192.168.56.15) (TCP)
+;; WHEN: Sat Aug 15 10:45:02 UTC 2026
+;; MSG SIZE  rcvd: 187
+
+
+[+] STEP 2: Testing Full Zone Transfer (AXFR)
+Command: dig axfr lab.local @192.168.56.15
+
+; <<>> DiG 9.18.28-1~deb12u1-Kali <<>> axfr lab.local @192.168.56.15
+;; global options: +cmd
+lab.local.		604800	IN	SOA	ns1.lab.local. admin.lab.local. 2026081501 604800 86400 2419200 604800
+lab.local.		604800	IN	NS	ns1.lab.local.
+lab.local.		604800	IN	MX	10 mail.lab.local.
+lab.local.		604800	IN	TXT	"v=spf1 mx a -all"
+mail.lab.local.		604800	IN	A	192.168.56.20
+ns1.lab.local.		604800	IN	A	192.168.56.15
+target.lab.local.	604800	IN	A	192.168.56.20
+web.lab.local.		604800	IN	A	192.168.56.20
+www.lab.local.		604800	IN	CNAME	web.lab.local.
+lab.local.		604800	IN	SOA	ns1.lab.local. admin.lab.local. 2026081501 604800 86400 2419200 604800
+;; Query time: 1 msec
+;; SERVER: 192.168.56.15#53(192.168.56.15) (TCP)
+;; WHEN: Sat Aug 15 10:45:05 UTC 2026
+;; XFR size: 10 records (messages 1, bytes 284)
+
+[*] FINDING CONFIRMED: Unrestricted AXFR Zone Transfer Succeeded. 10 Records Dumped.

@@ -1,0 +1,29 @@
+;
+; BIND data file for lab.local zone
+;
+$TTL    604800
+@       IN      SOA     ns1.lab.local. admin.lab.local. (
+                              2026081501 ; Serial (YYYYMMDDNN)
+                                  604800 ; Refresh
+                                   86400 ; Retry
+                                 2419200 ; Expire
+                                  604800 ) ; Negative Cache TTL
+;
+
+; Authoritative Name Server
+@       IN      NS      ns1.lab.local.
+
+; Host A Records
+ns1     IN      A       192.168.56.15
+web     IN      A       192.168.56.20
+target  IN      A       192.168.56.20
+mail    IN      A       192.168.56.20
+
+; Mail Exchange Record
+@       IN      MX  10  mail.lab.local.
+
+; Canonical Name Records
+www     IN      CNAME   web.lab.local.
+
+; TXT (SPF) Records
+@       IN      TXT     "v=spf1 mx a -all"
