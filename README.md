@@ -1,5 +1,14 @@
 # Cybersecurity Capstone: Threat Detection, Security Automation & Hardened Infrastructure
 
+<p align="left">
+  <img src="https://github.com/4aru5h/Cybersecurity-Automation-And-Intelligent-Threat-Detection/actions/workflows/security.yml/badge.svg" alt="DevSecOps Security Gate" />
+  <img src="https://github.com/4aru5h/Cybersecurity-Automation-And-Intelligent-Threat-Detection/actions/workflows/codeql.yml/badge.svg" alt="CodeQL Scan" />
+  <img src="https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white" alt="Python 3.11" />
+  <img src="https://img.shields.io/badge/Security-STRIDE_Threat_Model-red" alt="STRIDE" />
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License" />
+</p>
+
+
 An end-to-end cybersecurity suite built as a senior capstone project for computer engineering at MPSTME, NMIMS. Combines security operations automation, machine learning threat detection, a full PTES-compliant penetration testing audit against an isolated lab subnet, and a cryptographically hardened REST API.
 
 ---
