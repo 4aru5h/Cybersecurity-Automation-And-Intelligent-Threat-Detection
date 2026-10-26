@@ -7,10 +7,10 @@ This repository contains Python security automation tools and machine learning m
 
 ## 1. Design Decisions
 
-* **Port Scanner (`port_scanner.py`):** Constructed using Python standard libraries (`socket`, `threading`, `argparse`) without external binary dependencies. Uses socket timeouts (default 1.0s) to prevent threads from hanging on filtered ports, banner decoding with UTF-8 fallback handling (`errors="ignore"`), and a explicit `threading.Lock()` to prevent race conditions when updating the shared output array.
-* **Log Enricher (`log_enricher.py`):** Uses regular expressions to extract IPv4 addresses in dotted-decimal format. Applies custom filtering logic to discard RFC 1918 private IP ranges (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) and loopback addresses before deduplicating via Python `set`. Queries `ip-api.com` REST API for ISP, country, proxy, and hosting indicators.
-* **VirusTotal API Integration (`virustotal_check.py`):** Integrates VirusTotal API v3 via HTTP headers (`x-apikey`). Enforces security best practices by loading `VT_API_KEY` from environment variables using `python-dotenv`. Handles API error statuses (401, 429, 404) gracefully without crashing.
-* **Machine Learning Threat Detector (`ml_threat_detector.py`):** Uses `pandas` and `scikit-learn` to process a 5,000-sample binary-labeled security dataset. Compares a supervised Random Forest Classifier against an unsupervised Isolation Forest anomaly detector.
+* **Port Scanner (`port_scanner.py`):** Constructed using Python standard libraries (`socket`, `concurrent.futures`, `argparse`) without external binary dependencies. Uses a high-performance `ThreadPoolExecutor` for continuous worker thread reuse, single-pass socket banner acquisition on established connections, upfront hostname DNS resolution, and flexible port range parsing (e.g. `80`, `1-1024`, `22,80,443`).
+* **Log Enricher (`log_enricher.py`):** Uses regular expressions to extract IPv4 candidates and Python's standard `ipaddress` library to enforce strict RFC-compliant public IP filtering. Correctly filters RFC 1918 private IP ranges, loopback, link-local, carrier-grade NAT (100.64.0.0/10), multicast, and reserved addresses. Queries `ip-api.com` REST API for ISP, country, proxy, and hosting indicators with graceful HTTP 429 rate limit handling.
+* **VirusTotal API Integration (`virustotal_check.py`):** Integrates VirusTotal API v3 via HTTP headers (`x-apikey`). Enforces security best practices by loading `VT_API_KEY` from environment variables using `python-dotenv`. Handles API error statuses (401, 429, 404) gracefully and includes a `--mock` offline demonstration mode.
+* **Machine Learning Threat Detector (`ml_threat_detector.py`):** Features dual-mode threat detection: a 5,000-sample synthetic benchmark comparing supervised Random Forest Classifier against unsupervised Isolation Forest anomaly detection, as well as a log inference pipeline (`--input`) that parses firewall and authentication logs to classify anomalous security events.
 
 ---
 
@@ -69,15 +69,21 @@ python3 log_enricher.py sample_logs.txt
 
 * **Run VirusTotal API Check:**
 ```bash
+# Live API query (requires VT_API_KEY in .env)
 python3 virustotal_check.py 8.8.8.8 185.220.101.5
 
+# Mock demonstration mode (offline verification)
+python3 virustotal_check.py --mock 8.8.8.8 185.220.101.5
 ```
 
 
 * **Run ML Threat Detector Pipeline:**
 ```bash
-python3 ml_threat_detector.py
+# Log file threat inference mode (extracts security features from logs)
+python3 ml_threat_detector.py --input sample_logs.txt
 
+# Synthetic benchmark comparison mode (5,000 samples)
+python3 ml_threat_detector.py --benchmark
 ```
 
 

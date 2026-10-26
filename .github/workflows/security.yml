@@ -8,7 +8,7 @@ on:
 
 jobs:
   sast-analysis:
-    name: SAST Analysis (Bandit & Semgrep)
+    name: SAST Analysis & Automated Tests
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +25,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r 01-python-security-automation-ml/requirements.txt
           pip install -r 03-flask-secure-api/requirements.txt
-          pip install bandit semgrep
+          pip install pytest bandit semgrep
+
+      - name: Run Automated Test Suite
+        run: |
+          pytest -v
 
       - name: Run Bandit SAST
         run: |

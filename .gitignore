@@ -23,3 +23,15 @@ yarn-error.log*
 Thumbs.db
 *.bak
 *.swp
+
+# SQLite & Local Databases
+*.db
+*.sqlite
+*.sqlite3
+app.db
+*-journal
+
+# Testing & Cache
+.pytest_cache/
+.coverage
+htmlcov/
