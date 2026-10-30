@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License" />
 </p>
 
-An end-to-end cybersecurity suite built as a senior capstone project for computer engineering at MPSTME, NMIMS. Combines security operations automation, machine learning threat detection, a full PTES-compliant penetration testing audit against an isolated lab subnet, and a cryptographically hardened REST API.
+An end-to-end cybersecurity suite built as a senior capstone project for my Cybersecurity and Ethical Hacking with Applied AI course from iHub DivyaSampark, IIT Roorkee. Combines security operations automation, machine learning threat detection, a full PTES-compliant penetration testing audit against an isolated lab subnet, and a cryptographically hardened REST API.
 
 ---
 
