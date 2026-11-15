@@ -2,7 +2,7 @@
 
 A security engineering project built for my Cybersecurity and Ethical Hacking with Applied AI course from iHub DivyaSampark, IIT Roorkee.
 
-It brings together automated reconnaissance tooling, machine learning for log anomaly detection, a PTES-compliant penetration testing lab audit, and a hardened Flask REST API.
+It brings together automated reconnaissance tools, machine learning for log anomaly detection, a PTES-compliant penetration testing lab audit, and a hardened Flask REST API.
 
 ---
 
